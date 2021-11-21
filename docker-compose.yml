@@ -1,0 +1,18 @@
+redis:
+  image: redis:6.2-alpine
+  ports:
+    - "6379:6379"
+  command: redis-server --save 60 1 --loglevel warning
+
+postgres:
+  image: postgres:9.4
+  restart: always
+  environment:
+    - DATABASE_HOST=127.0.0.1
+    - POSTGRES_USER=cryptocompare_login
+    - POSTGRES_PASSWORD=cryptocompare_password
+    - POSTGRES_DB=cryptocompare
+  ports:
+    - "5432:5432"
+  volumes:
+    - ./migrations/init_cryptocompare_tables.sql:/docker-entrypoint-initdb.d/init_cryptocompare_tables.sql

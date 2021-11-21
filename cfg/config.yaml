@@ -1,0 +1,28 @@
+fsyms:
+  - "BTC"
+  - "XRP"
+  - "ETH"
+  - "BCH"
+  - "EOS"
+  - "LTC"
+  - "XMR"
+  - "DASH"
+
+tsyms:
+  - "USD"
+  - "EUR"
+  - "GBP"
+  - "JPY"
+  - "RUR"
+
+psql:
+  hostname: "localhost"
+  port: 5432
+  login: "cryptocompare_login"
+  password: "cryptocompare_password"
+  db: "cryptocompare"
+
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
