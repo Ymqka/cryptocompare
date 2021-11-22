@@ -15,10 +15,11 @@ type CryptoInfoRepoCache struct {
 	Redis *redis.Client
 }
 
+// GetLatestCryptoInfo get crypto info from cache, if cache is empty get info from pg
 func (mr *CryptoInfoRepoCache) GetLatestCryptoInfo(ctx context.Context) (latestInfo []byte, err error) {
 	var result string
 	if result, err = mr.Redis.Get(ctx, CryptoInfoCacheKey).Result(); err != nil {
-		return nil, err
+		return mr.CryptoInfoRepo.GetLatestCryptoInfo(ctx)
 	}
 
 	return []byte(result), nil
