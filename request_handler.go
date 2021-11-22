@@ -75,22 +75,11 @@ func (rh *RequestHandler) priceHandler(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if resp, err = rh.cryptoInfo.GetLatestCryptoInfo(ctx); err != nil {
-		// ignore error
-	}
-
-	if err == nil {
-		w.WriteHeader(http.StatusOK)
-		if _, err = w.Write(resp); err != nil {
-			rh.l.Error("w.Write error", zap.Error(err))
+		resp, err = rh.getCryptoInfo(ctx, fsyms, tsyms)
+		if err != nil {
+			rh.l.Error("getCryptoInfo error", zap.Error(err))
+			return
 		}
-
-		return
-	}
-
-	resp, err = rh.getCryptoInfo(ctx, fsyms, tsyms)
-	if err != nil {
-		rh.l.Error("getCryptoInfo error", zap.Error(err))
-		return
 	}
 
 	var rw entities.CryptocompareResp
@@ -100,12 +89,7 @@ func (rh *RequestHandler) priceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var clearResp []byte
-	if clearResp, err = json.Marshal(rw); err != nil {
-		rh.l.Error("failed to marhal json", zap.Error(err))
-		http.Error(w, "Something bad happened", http.StatusInternalServerError)
-		return
-	}
+	clearResp := rw.GetByFsymsAndTsyms(fsyms, tsyms)
 
 	w.WriteHeader(http.StatusOK)
 	if _, err = w.Write(clearResp); err != nil {
