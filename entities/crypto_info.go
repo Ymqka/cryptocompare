@@ -3,12 +3,11 @@ package entities
 import (
 	"context"
 
-	"cryptocompare/cache"
-	"cryptocompare/repository"
-
 	"github.com/go-redis/redis/v8"
-
 	"github.com/jackc/pgx/v4"
+
+	"github.com/Ymqka/cryptocompare/cache"
+	"github.com/Ymqka/cryptocompare/repository"
 )
 
 const CryptoInfoCacheKey = "cryptoInfoKey"

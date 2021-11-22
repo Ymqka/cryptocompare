@@ -3,7 +3,7 @@ package cache
 import (
 	"context"
 
-	"cryptocompare/repository"
+	"github.com/Ymqka/cryptocompare/repository"
 
 	"github.com/go-redis/redis/v8"
 )

@@ -6,12 +6,12 @@ import (
 	"net/http"
 	"os"
 
-	"cryptocompare/entities"
-
 	"github.com/go-redis/redis/v8"
 	"github.com/jackc/pgx/v4"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
+
+	"github.com/Ymqka/cryptocompare/entities"
 )
 
 type RequestHandler struct {

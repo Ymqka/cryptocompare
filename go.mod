@@ -1,4 +1,4 @@
-module cryptocompare
+module github.com/Ymqka/cryptocompare
 
 go 1.17
 

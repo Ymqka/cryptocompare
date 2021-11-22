@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"cryptocompare/entities"
+	"github.com/Ymqka/cryptocompare/entities"
 
 	"go.uber.org/zap"
 )
