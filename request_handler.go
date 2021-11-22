@@ -78,6 +78,7 @@ func (rh *RequestHandler) priceHandler(w http.ResponseWriter, r *http.Request) {
 		resp, err = rh.getCryptoInfo(ctx, fsyms, tsyms)
 		if err != nil {
 			rh.l.Error("getCryptoInfo error", zap.Error(err))
+			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 	}
